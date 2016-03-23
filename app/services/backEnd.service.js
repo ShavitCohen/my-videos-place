@@ -144,9 +144,10 @@
     function createNewContent(listId,content){
       var deferred = $q.defer();
 
-      var contentId = new Date().getTime();
+      var contentId = content.id;//new Date().getTime();
       var contentToSend = {
         name:content.name,
+        id:content.id,
         description:content.description,
         contentUrl:content.contentUrl,
         startTime:content.startTime,

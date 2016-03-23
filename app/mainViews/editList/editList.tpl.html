@@ -1,22 +1,72 @@
-<div class="">
-  <div class="player">
-    <div class="contents">
-      <ul>
-        <li ng-repeat="(contentId, content) in contents">
+<div class="editListP row">
 
-          <div ng-click="loadContent(contentId)">
+
+    <div class="contents col-md-2">
+      <div class="titleRow" >
+        <div class="plusContainer" ng-click="createNewContent()"  >
+          <div>
+            <i class="fa fa-plus"></i>
+          </div>
+        </div>
+      </div>
+
+
+      <ul >
+        <li ng-repeat="(contentId, content) in contents" ng-class="{selected:content.id === currentContet.id}"">
+
+          <div ng-click="loadContent(content)">
             {{content.name}}
           </div>
 
         </li>
       </ul>
     </div>
-  </div>
-<span ng-click="createNewContent()">+ add new content</span>
 
+    <div class="player col-md-10" ng-if="currentContet || newContent">
 
-<div id="player">
-
+<div>
+      <form class="form-horizontal" ng-submit="saveNewContent()"" >
+        <div class="form-group">
+          <label for="list-name" class="col-sm-2 control-label">Content Name</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="currentContet.name" class="form-control" id="list-name" placeholder="Contet Name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="list-description" class="col-sm-2 control-label">Content Description</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" ng-model="currentContet.description" id="list-description" placeholder="Contet Description"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="list-description" class="col-sm-2 control-label">Content Url</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="currentContet.contentUrl" id="list-description" placeholder="Contet Url"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="list-description" class="col-sm-2 control-label">Start Time (second)</label>
+          <div class="col-sm-10">
+            <input type="number" min="0" class="form-control" ng-model="currentContet.startTime" id="list-description" placeholder="Start Time"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="list-description" class="col-sm-2 control-label">Ende Time (second)</label>
+          <div class="col-sm-10">
+            <input type="number" min="0" class="form-control" ng-model="currentContet.endTime" id="list-description" placeholder="End Time"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-default">{{currentContet.id ? 'Save' : 'Create'}}</button>
+      </form>
+    </div>
+    <div ng-show="!newContent">
+      <div id="player">
 </div>
+      </div>
+
+  </div>
+
+
+
 
 </div>

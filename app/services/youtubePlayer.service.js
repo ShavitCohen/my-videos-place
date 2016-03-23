@@ -11,6 +11,7 @@
       setPlayer:setPlayer,
       getYouTubeIdFromURL:getYouTubeIdFromURL,
       loadVideo:loadVideo,
+      removeVideo:removeVideo,
       getVideoSettingFromAContent:getVideoSettingFromAContent,
       currentContent:null,
       player:null,
@@ -46,6 +47,7 @@
     }
 
     function getVideoSettingFromAContent(content){
+      console.log('content.contentUrl: ' + content.contentUrl);
       var settings = {
         videoId:_service.getYouTubeIdFromURL(content.contentUrl)
       }
@@ -62,11 +64,16 @@
       }
     }
 
-
+    function removeVideo(){
+      if(_service.player){
+        _service.player.stopVideo();
+      }
+    }
 
     function getYouTubeIdFromURL(url){
       //debugger;
      var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+console.log('url: ' + url);
      var match = url.match(regExp);
      if (match && match[7].length == 11) {
        return  match[7];

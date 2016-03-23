@@ -7,34 +7,60 @@
 
   function ctrl($scope,backEndService,$stateParams,youtubePlayerService){
     var listId = $stateParams.id;
+    $scope.currentContet = null; // current edited contet
+    $scope.contents = null; // all contet items array
+    $scope.newContent = false;
+
     backEndService.getContentOfAList(listId)
     .then(function(contents){
       $scope.contents = contents;
+      console.log('$scope.contents: ' + JSON.stringify($scope.contents));
       var firstItemID = Object.keys(contents)[0];
-      youtubePlayerService.currentContent = contents[firstItemID];
+      $scope.currentContet = contents[firstItemID];
+      youtubePlayerService.currentContent =  $scope.currentContet;
+      console.log('youtubePlayerService.currentContent: ' + youtubePlayerService.currentContent);
       youtubePlayerService.loadVideo(youtubePlayerService.getVideoSettingFromAContent(contents[firstItemID]),"player");
     })
 
-    $scope.loadContent = function(contentId){
-      youtubePlayerService.currentContent = $scope.contents[contentId];
-      var settings = youtubePlayerService.getVideoSettingFromAContent(youtubePlayerService.currentContent);
+    $scope.loadContent = function(content){
+      console.log('content: ' + content);
+      $scope.currentContet = content;
+      youtubePlayerService.currentContent = $scope.currentContet;
+      var settings = youtubePlayerService
+      .getVideoSettingFromAContent(youtubePlayerService.currentContent);
       youtubePlayerService.loadVideo(settings);
     }
 
-    $scope.createNewContent = function(){
-      var content = {
-        name:"my new video",
-        description:"my new video rocks",
-        contentUrl:"https://www.youtube.com/watch?v=6LNpGsYpWJw",
-        startTime:5,
-        endTime:25,
-        contentType:"video"
-      }
-      backEndService.createNewContent(listId, content)
+    $scope.saveNewContent = function(){
+      $scope.currentContet.contentType = 'video';
+      $scope.currentContet.id = new Date().getTime();
+      //console.log('$scope.currentContet: ' + JSON.stringify($scope.currentContet));
+      backEndService.createNewContent(listId, $scope.currentContet)
       .then(function(newContent){
-
+        $scope.newContent = false;
+        console.log('newContent: ' + JSON.stringify(newContent));
+          console.log('Object.keys(newContent)[0]: ' + Object.keys(newContent)[0]);
+        $scope.contents[Object.keys(newContent)[0].id] = angular.copy(newContent[Object.keys(newContent)[0]]);
+        $scope.currentContet = $scope.contents[Object.keys(newContent)[0].id]
+        $scope.loadContent($scope.currentContet);
       })
     }
+
+    $scope.createNewContent = function(){
+      $scope.newContent = true;
+      $scope.currentContet = {};//zero the currentContet object
+      youtubePlayerService.removeVideo();
+    }
+  /*
+    $scope.$watch(function(){
+      return $scope.currentContet.contentUrl;
+    },function(newVal,oldVal){
+
+
+    });
+    */
   }
+
+
 
 })();
