@@ -3,24 +3,27 @@
   angular.module("controllers")
   .controller("editorPortalCtrl",ctrl);
 
-  ctrl.$inject = ['$scope','backEndService'];
+  ctrl.$inject = ['$scope','backEndService','$state'];
 
-  function ctrl($scope,backEndService){
+  function ctrl($scope,backEndService,$state){
 
       backEndService.getUserLists()
       .then(function(lists){
         $scope.lists = lists;
       })
 
-      $scope.createNewList = function(){
-        var list = {
-          name:"list name",
-          description:"list description",
-          topic:"my topic"
-        }
+      $scope.newListData = {
+        name:null,
+        description:null,
+        topic:null
+      }
+
+      $scope.createNewList = function(list){
+
         backEndService.createNewList(list)
         .then(function(newList){
-          debugger;
+          var listId = Object.keys(newList)[0];
+          $state.go('editList',{id:listId});
         })
       }
 

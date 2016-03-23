@@ -1,10 +1,33 @@
 <div class="">
 
   <div class="">
-    <span ng-click="createNewList()">+ New Video List</span>
+    <span ng-click="showNewListForm = !showNewListForm">+ New Video List</span>
     <div>
-      <form>
+      <form class="form-horizontal" ng-if="showNewListForm">
+        <div class="form-group">
+          <label for="list-name" class="col-sm-2 control-label">List Name</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="newListData.name" class="form-control" id="list-name" placeholder="List Name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="list-topic" class="col-sm-2 control-label">List Topic</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="newListData.topic" class="form-control" id="list-topic" placeholder="List Topic">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="list-description" class="col-sm-2 control-label">List Description</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" ng-model="newListData.description" id="list-description" placeholder="List Description"></textarea>
+          </div>
+        </div>
 
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-default" ng-click="createNewList(newListData)">Add List</button>
+          </div>
+        </div>
       </form>
     </div>
 

@@ -15,7 +15,7 @@
     .state('editorPortal', {
       url: "/editorPortal",
       templateUrl: "mainViews/editorPortal/editorPortal.tpl.html",
-      controller: "editorPortalCtrl"
+      controller: "editorPortalCtrl"      
     })
     .state('editList', {
       url: "/editList/:id",
