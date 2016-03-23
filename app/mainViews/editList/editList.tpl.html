@@ -1,0 +1,22 @@
+<div class="">
+  <div class="player">
+    <div class="contents">
+      <ul>
+        <li ng-repeat="(contentId, content) in contents">
+
+          <div ng-click="loadContent(contentId)">
+            {{content.name}}
+          </div>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+<span ng-click="createNewContent()">+ add new content</span>
+
+
+<div id="player">
+
+</div>
+
+</div>

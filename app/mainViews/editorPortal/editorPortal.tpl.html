@@ -1,0 +1,26 @@
+<div class="">
+
+  <div class="">
+    <span ng-click="createNewList()">+ New Video List</span>
+    <div>
+      <form>
+
+      </form>
+    </div>
+
+    your lists:
+    <ul>
+      <li ng-repeat="(listId, list) in lists">
+        <div class="">
+          <a href="#/editList/{{listId}}">{{list.name}}</a>
+        </div>
+        <div class="">
+          {{list.description}}
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+
+</div>
