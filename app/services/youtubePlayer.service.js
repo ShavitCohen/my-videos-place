@@ -14,7 +14,7 @@
       getVideoSettingFromAContent:getVideoSettingFromAContent,
       currentContent:null,
       player:null,
-      onPlayerStateChange:onPlayerStateChange
+      onPlayerStateChange:onPlayerStateChange,
       playerContainer:null
     }
 
