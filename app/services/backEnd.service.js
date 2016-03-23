@@ -42,7 +42,8 @@
     function logIn(source){
 
       var deferred = $q.defer();
-      _ref.authWithOAuthPopup(source, _afterAuth,{scope:'email'});
+      var scope  = source == 'github' ? 'user:email' : 'email'
+      _ref.authWithOAuthPopup(source, _afterAuth,{scope:scope});
 
       function _afterAuth(error, authData) {
         if (error) {
