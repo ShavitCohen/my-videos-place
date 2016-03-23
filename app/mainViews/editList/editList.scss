@@ -4,15 +4,17 @@
     background-color: #F5F7F9;
     padding-right: 0;
     padding-left: 0;
+    height:100vh;
 
     .titleRow{
-      padding-right: 10px;
-      padding-left: 10px;
+      padding: 10px;
       text-align:right;
       text-align: right;
       padding-top: 5px;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      border-bottom: solid 1px #e1e1e1;
+      font-size: 18px;
 
       .plusContainer{
         display: block;
@@ -48,7 +50,7 @@
       color: #ffffff;
     }
     li:last-child{
-      border: none;
+      //border: none;
     }
 
     li:hover{
@@ -60,6 +62,15 @@
 
   }
 
-
+form{
+  margin-bottom: 15px;
+}
+  .buttons{
+    text-align: right;;
+  }
+  .playerWraper
+  {
+    padding-left: 7px;
+  }
 
 }

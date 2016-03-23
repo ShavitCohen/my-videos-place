@@ -4,3 +4,9 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "../app/mainViews/editorPortal/editorPortal";
 @import "../app/mainViews/homePage/homePage";
 @import "../app/mainViews/watch/watch";
+
+
+.container
+{
+  width: 100%;
+}

@@ -20,7 +20,7 @@
       // editList:editList,
       //
        getContentOfAList:getContentOfAList,
-       createNewContent:createNewContent,
+       saveContent:saveContent,
       // editContent:editContent,
 
       // sortContent:sortContent
@@ -141,7 +141,7 @@
       return deferred.promise;
     }
 
-    function createNewContent(listId,content){
+    function saveContent(listId,content,update){
       var deferred = $q.defer();
 
       var contentId = content.id;//new Date().getTime();
@@ -154,11 +154,15 @@
         endTime:content.endTime,
         contentType:"video"
       }
+      var action = "child_added";//a creation action
+      if (update){action = "child_changed"}//an update action
 
-      _ref.child("users").child(_service.currentAuth.uid).child("lists").child(listId).child("contents").once("child_added", _afterAdd);
+      _ref.child("users").child(_service.currentAuth.uid).child("lists").child(listId).child("contents").once(action, _afterSave);
       _ref.child("users").child(_service.currentAuth.uid).child("lists").child(listId).child("contents").child(contentId).set(contentToSend);
 
-      function _afterAdd(contentSnapshot){
+
+
+      function _afterSave(contentSnapshot){
         var contentObj = {};
         contentObj[contentId] = contentSnapshot.val();
         deferred.resolve(contentObj);
